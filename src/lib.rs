@@ -1,3 +1,4 @@
+#![allow(warnings)]
 pub mod mlp;
 pub mod f_not_linear;
 pub mod optimizers;

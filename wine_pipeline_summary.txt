@@ -1,0 +1,10 @@
+
+
+ ### RESUMO DO PIPELINE DE VINHOS 
+
+ #          Pipeline: Relatório Semanal
+ #       Agendamento: 0 9 * * 1
+ # Total de amostras: 6497
+ # Vinhos tintos: 1599
+ # Vinhos brancos: 4898
+ # Qualidade média: 5.82
