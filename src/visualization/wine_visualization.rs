@@ -1,25 +1,19 @@
-//! Módulo de visualização para análise de vinhos
-//! 
-//! Este módulo cria visualizações em texto e gráficos ASCII
-//! para complementar a análise de dados de vinhos
+
 
 use crate::data_science_example::{WineSample, WineDataset};
 use std::collections::HashMap;
 
-/// Estrutura para criar visualizações de dados de vinhos
 pub struct WineVisualizer {
     pub dataset: Vec<WineSample>,
 }
 
 impl WineVisualizer {
-    /// Cria um novo visualizador
     pub fn new(dataset: Vec<WineSample>) -> Self {
         Self { dataset }
     }
 
-    /// Cria um histograma ASCII da distribuição de qualidade
     pub fn quality_histogram(&self) -> Result<(), Box<dyn std::error::Error>> {
-        println!("\n📊 === HISTOGRAMA DE QUALIDADE ===");
+        println!("\n ### HISTOGRAMA DE QUALIDADE");
         
         let mut quality_counts = HashMap::new();
         for sample in &self.dataset {
@@ -47,7 +41,7 @@ impl WineVisualizer {
 
     /// Cria um gráfico de dispersão ASCII entre álcool e qualidade
     pub fn alcohol_quality_scatter(&self) -> Result<(), Box<dyn std::error::Error>> {
-        println!("\n🍷 === GRÁFICO ÁLCOOL vs QUALIDADE ===");
+        println!("\n ### GRÁFICO ÁLCOOL vs QUALIDADE ");
         
         // Criar grid 20x10 para o gráfico
         let mut grid = vec![vec![' '; 60]; 12];
@@ -92,13 +86,13 @@ impl WineVisualizer {
 
     /// Cria um gráfico de barras comparativo por tipo de vinho
     pub fn wine_type_comparison(&self) -> Result<(), Box<dyn std::error::Error>> {
-        println!("\n🔴⚪ === COMPARAÇÃO POR TIPO DE VINHO ===");
+        println!("\n ### COMPARAÇÃO POR TIPO DE VINHO");
         
         let red_wines: Vec<_> = self.dataset.iter().filter(|s| s.wine_type == "red").collect();
         let white_wines: Vec<_> = self.dataset.iter().filter(|s| s.wine_type == "white").collect();
         
         if red_wines.is_empty() || white_wines.is_empty() {
-            println!("⚠️  Dados insuficientes para comparação");
+            println!(" !!! ###  Dados insuficientes para comparação. ### !!! ");
             return Ok(());
         }
         
@@ -136,7 +130,7 @@ impl WineVisualizer {
 
     /// Cria uma matriz de correlação visual
     pub fn correlation_matrix(&self) -> Result<(), Box<dyn std::error::Error>> {
-        println!("\n🔗 === MATRIZ DE CORRELAÇÃO VISUAL ===");
+        println!("\n ### MATRIZ DE CORRELAÇÃO VISUAL ###");
         
         let features = vec![
             ("Álcool", self.dataset.iter().map(|s| s.alcohol).collect::<Vec<_>>()),
@@ -205,9 +199,7 @@ impl WineVisualizer {
 
     /// Cria um dashboard resumo com múltiplas visualizações
     pub fn create_dashboard(&self) -> Result<(), Box<dyn std::error::Error>> {
-        println!("\n{}", "=".repeat(80));
-        println!("📊 DASHBOARD DE VISUALIZAÇÃO - DATASET WINE QUALITY");
-        println!("{}", "=".repeat(80));
+        println!("\n ########### \n DASHBOARD DE VISUALIZAÇÃO - DATASET WINE QUALITY \n ############");
         
         // Estatísticas gerais
         let total_samples = self.dataset.len();
@@ -216,12 +208,12 @@ impl WineVisualizer {
         let avg_quality = self.dataset.iter().map(|s| s.quality as f64).sum::<f64>() / total_samples as f64;
         let avg_alcohol = self.dataset.iter().map(|s| s.alcohol).sum::<f64>() / total_samples as f64;
         
-        println!("📈 RESUMO EXECUTIVO:");
-        println!("  • Total de amostras: {}", total_samples);
-        println!("  • Vinhos tintos: {} ({:.1}%)", red_count, (red_count as f64 / total_samples as f64) * 100.0);
-        println!("  • Vinhos brancos: {} ({:.1}%)", white_count, (white_count as f64 / total_samples as f64) * 100.0);
-        println!("  • Qualidade média: {:.2}", avg_quality);
-        println!("  • Teor alcoólico médio: {:.2}%", avg_alcohol);
+        println!(" ### RESUMO:");
+        println!("  # Total de amostras: {}", total_samples);
+        println!("  # Vinhos tintos: {} ({:.1}%)", red_count, (red_count as f64 / total_samples as f64) * 100.0);
+        println!("  # Vinhos brancos: {} ({:.1}%)", white_count, (white_count as f64 / total_samples as f64) * 100.0);
+        println!("  # Qualidade média: {:.2}", avg_quality);
+        println!("  # Teor alcoólico médio: {:.2}%", avg_alcohol);
         
         // Visualizações
         self.quality_histogram()?;
@@ -229,7 +221,7 @@ impl WineVisualizer {
         self.alcohol_quality_scatter()?;
         self.correlation_matrix()?;
         
-        println!("\n✅ Dashboard de visualização concluído!");
+        println!("\n ### Fim da visualização. \n");
         Ok(())
     }
 }
