@@ -10,6 +10,9 @@ mod mamba_test;
 mod algebra_linear;
 mod data_science_example;
 
+mod visualization;
+use visualization::wine_visualization;
+
 
 fn main() {
 
@@ -25,19 +28,25 @@ fn main() {
     //      eprintln!("Experiment MLP Wine: {}", e);
     //  }
 
-    //   if let Err(e) = lstm_test::main() {
-    //      eprintln!("Experiment LSTM Jena Climate: {}", e);
-    //  }
+    // if let Err(e) = lstm_test::main() {
+    //     eprintln!("Experiment LSTM Jena Climate: {}", e);
+    // }
 
     
+    // println!("\n####### TESTE, ARQUIVO: data_science_example.rs");
+    // println!("####### TESTE,  MODULO: src/data_science/mod.rs \n");
 
-    println!("\n####### TESTE, ARQUIVO: data_science_example.rs");
-    println!("####### TESTE,  MODULO: src/data_science/mod.rs \n");
+
+    // if let Err(e) = data_science_example::run_complete_wine_analysis() {
+    //     eprintln!(" !!! ### Erro na análise completa: {} ### !!! ", e);
+    // }
 
 
-    if let Err(e) = data_science_example::run_complete_wine_analysis() {
-        eprintln!(" !!! ### Erro na análise completa: {} ### !!! ", e);
+    if let Err(e) = wine_visualization::run_wine_visualization_demo(){
+        eprintln!("Erro na visualização (wine): {}", e);
     }
+
+   
 
 
  }

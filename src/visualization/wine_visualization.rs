@@ -1,4 +1,5 @@
 
+use std::error::Error;
 
 use crate::data_science_example::{WineSample, WineDataset};
 use std::collections::HashMap;
@@ -231,4 +232,15 @@ pub fn create_wine_visualizations(samples: Vec<WineSample>) -> Result<(), Box<dy
     let visualizer = WineVisualizer::new(samples);
     visualizer.create_dashboard()?;
     Ok(())
+}
+
+/// Demo: carrega os CSVs e roda todas as visualizações ASCII no terminal.
+pub fn run_wine_visualization_demo() -> Result<(), Box<dyn std::error::Error>> {
+    let mut ds = WineDataset::new("Wine Quality (viz demo)");
+    // ajuste os caminhos se necessário
+    ds.load_from_csv("wine_dataset/winequality-red.csv", "red")?;
+    ds.load_from_csv("wine_dataset/winequality-white.csv", "white")?;
+
+    // O visualizador consome Vec<WineSample>; WineSample é Clone, então podemos clonar:
+    create_wine_visualizations(ds.samples.clone())
 }
